@@ -8,136 +8,196 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="site-header">
     <nav class="nav">
-      <a href="index.html" class="nav-logo">VX</a>
+      <a href="#home" class="nav-logo">VX</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
       <ul class="nav-links">
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section class="hero">
-      <p class="hero-eyebrow">ML &amp; Software Engineering</p>
-      <h1>Vincent Xayasak</h1>
-      <p class="hero-tagline">
-        Building LLM systems, evaluation pipelines, and production ML infrastructure.
-        B.S. Computer Science, UC Davis (2026).
-      </p>
-      <div class="hero-links">
-        <a href="https://github.com/VincentXayasak" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://linkedin.com/in/vincentxayasak" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="mailto:xayasakvincent@gmail.com">Email</a>
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1 class="hero-greeting">Hello, I'm <span class="accent">Vincent</span>.</h1>
+        <p class="hero-role">ML &amp; software engineer building LLM systems, evaluation pipelines, and production ML infrastructure.</p>
+        <a href="#projects" class="hero-cta">
+          View my work
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <div class="hero-social">
+          <a href="https://github.com/VincentXayasak" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/vincentxayasak" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:xayasakvincent@gmail.com">Email</a>
+        </div>
       </div>
     </section>
 
-    <section id="projects" class="projects">
-      <h2>Selected Work</h2>
-      <p class="section-intro">Five projects spanning industry ML systems, research, and applied engineering.</p>
+    <section id="about" class="section about">
+      <h2 class="section-title">About</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a computer science graduate from UC Davis with experience spanning industry ML
+            systems and academic research. At Advantest, I fine-tuned Llama 3.3 70B and deployed
+            production RAG pipelines for semiconductor test automation. At UC Davis, I co-authored
+            research on LLM bias evaluation and multi-dimensional reasoning model assessment.
+          </p>
+          <p>
+            I'm passionate about making LLMs reliable in real-world settings — whether that's
+            eliminating hallucinations in hardware spec retrieval or exposing what single-number
+            benchmarks hide about model behavior.
+          </p>
+        </div>
+        <div class="about-skills">
+          <p class="skills-title">Skills &amp; Tools</p>
+          <div class="skills-grid">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">PyTorch</span>
+            <span class="skill-pill">Hugging Face</span>
+            <span class="skill-pill">LLM Fine-tuning</span>
+            <span class="skill-pill">RAG</span>
+            <span class="skill-pill">FastAPI</span>
+            <span class="skill-pill">Docker</span>
+            <span class="skill-pill">CUDA</span>
+            <span class="skill-pill">Bias Evaluation</span>
+            <span class="skill-pill">Model Evaluation</span>
+            <span class="skill-pill">JavaScript</span>
+            <span class="skill-pill">SQL</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section projects-section">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-intro">Selected work across industry ML, research, hackathons, and coursework.</p>
 
       <div class="project-grid">
-        <article class="project-card project-card--featured">
-          <div class="project-card-meta">
-            <span class="badge badge--industry">Industry</span>
-            <span class="badge badge--confidential">Confidential</span>
+        <article class="project-card">
+          <div class="project-card-thumb project-card-thumb--industry">ML</div>
+          <div class="project-card-body">
+            <div class="project-card-meta">
+              <span class="badge badge--industry">Industry</span>
+              <span class="badge badge--confidential">Confidential</span>
+            </div>
+            <h3>LLM Systems for Semiconductor Test Automation</h3>
+            <p class="project-card-desc">
+              Fine-tuned Llama 3.3 70B, built a RAG pipeline, and deployed a production inference
+              service at Advantest — cutting firmware integration turnaround by ~90%.
+            </p>
+            <ul class="tag-list">
+              <li>QLoRA</li>
+              <li>RAG</li>
+              <li>FastAPI</li>
+              <li>Llama 3.3</li>
+            </ul>
+            <div class="project-card-actions">
+              <a href="projects/advantest.html" class="btn btn--primary">Learn more</a>
+            </div>
           </div>
-          <h3>LLM Systems for Semiconductor Test Automation</h3>
-          <p class="project-card-desc">
-            Fine-tuned Llama 3.3 70B, built a RAG pipeline, and deployed a production inference service
-            for Advantest's SmarTest8 platform — cutting firmware integration turnaround by ~90%.
-          </p>
-          <ul class="tag-list">
-            <li>QLoRA</li>
-            <li>RAG</li>
-            <li>FastAPI</li>
-            <li>Llama 3.3</li>
-          </ul>
-          <a href="projects/advantest.html" class="project-link">View case study →</a>
         </article>
 
         <article class="project-card">
-          <div class="project-card-meta">
-            <span class="badge badge--research">Research</span>
-            <span class="badge badge--submission">NeurIPS 2026 ED</span>
+          <div class="project-card-thumb project-card-thumb--research">BRIDGE</div>
+          <div class="project-card-body">
+            <div class="project-card-meta">
+              <span class="badge badge--research">Research</span>
+              <span class="badge badge--submission">NeurIPS 2026 ED</span>
+            </div>
+            <h3>BRIDGE</h3>
+            <p class="project-card-desc">
+              19,421-sentence benchmark for register-stratified LLM bias evaluation — uncovering the
+              Register Polarity Flip across eight frontier models.
+            </p>
+            <ul class="tag-list">
+              <li>GRDC</li>
+              <li>Bias Eval</li>
+              <li>Hugging Face</li>
+              <li>Gemini API</li>
+            </ul>
+            <div class="project-card-actions">
+              <a href="projects/bridge.html" class="btn btn--primary">Learn more</a>
+              <a href="https://huggingface.co/datasets/bridge-benchmark-2026/BRIDGE" class="btn btn--outline" target="_blank" rel="noopener">Dataset</a>
+            </div>
           </div>
-          <h3>BRIDGE</h3>
-          <p class="project-card-desc">
-            19,421-sentence benchmark for register-stratified LLM bias evaluation — uncovering the
-            Register Polarity Flip across eight frontier models.
-          </p>
-          <ul class="tag-list">
-            <li>GRDC</li>
-            <li>Bias Eval</li>
-            <li>Hugging Face</li>
-            <li>Gemini API</li>
-          </ul>
-          <a href="projects/bridge.html" class="project-link">View case study →</a>
         </article>
 
         <article class="project-card">
-          <div class="project-card-meta">
-            <span class="badge badge--research">Research</span>
-            <span class="badge badge--submission">ACL 2026</span>
+          <div class="project-card-thumb project-card-thumb--research">RPC</div>
+          <div class="project-card-body">
+            <div class="project-card-meta">
+              <span class="badge badge--research">Research</span>
+              <span class="badge badge--submission">ACL 2026</span>
+            </div>
+            <h3>LLM Capability Is Not a Scalar</h3>
+            <p class="project-card-desc">
+              Two complementary metrics — RPC and PSF — revealing behavioral differences between
+              Pass@1-matched reasoning models across 16 models and 4 benchmarks.
+            </p>
+            <ul class="tag-list">
+              <li>RPC</li>
+              <li>PSF</li>
+              <li>Pass@k</li>
+              <li>PyTorch</li>
+            </ul>
+            <div class="project-card-actions">
+              <a href="projects/llm-capability.html" class="btn btn--primary">Learn more</a>
+            </div>
           </div>
-          <h3>LLM Capability Is Not a Scalar</h3>
-          <p class="project-card-desc">
-            Two complementary metrics — RPC and PSF — revealing behavioral differences between
-            Pass@1-matched reasoning models across 16 models and 4 benchmarks.
-          </p>
-          <ul class="tag-list">
-            <li>RPC</li>
-            <li>PSF</li>
-            <li>Pass@k</li>
-            <li>PyTorch</li>
-          </ul>
-          <a href="projects/llm-capability.html" class="project-link">View case study →</a>
         </article>
 
         <article class="project-card project-card--coming-soon">
-          <div class="project-card-meta">
-            <span class="badge badge--hackathon">Hackathon</span>
+          <div class="project-card-thumb project-card-thumb--hackathon">LS</div>
+          <div class="project-card-body">
+            <div class="project-card-meta">
+              <span class="badge badge--hackathon">Hackathon</span>
+            </div>
+            <h3>Lil Sebastian</h3>
+            <p class="project-card-desc">Hackathon project. Coming soon.</p>
           </div>
-          <h3>Lil Sebastian</h3>
-          <p class="project-card-desc">Hackathon project. Coming soon.</p>
         </article>
 
         <article class="project-card project-card--coming-soon">
-          <div class="project-card-meta">
-            <span class="badge badge--academic">Academic</span>
+          <div class="project-card-thumb project-card-thumb--academic">ML</div>
+          <div class="project-card-body">
+            <div class="project-card-meta">
+              <span class="badge badge--academic">Academic</span>
+            </div>
+            <h3>Spotify Song Popularity Predictor</h3>
+            <p class="project-card-desc">Machine learning coursework project. Coming soon.</p>
           </div>
-          <h3>Spotify Song Popularity Predictor</h3>
-          <p class="project-card-desc">Machine learning coursework project. Coming soon.</p>
         </article>
       </div>
     </section>
 
-    <section id="about" class="about">
-      <h2>About</h2>
-      <p>
-        I'm an ML and software engineering graduate with experience in LLM fine-tuning, RAG systems,
-        model evaluation research, and production inference pipelines. My work spans semiconductor
-        test automation at Advantest and bias/reasoning evaluation research at UC Davis.
-      </p>
-    </section>
-
-    <section id="contact" class="contact">
-      <h2>Contact</h2>
-      <p>
-        <a href="mailto:xayasakvincent@gmail.com">xayasakvincent@gmail.com</a>
-        · <a href="https://linkedin.com/in/vincentxayasak" target="_blank" rel="noopener">LinkedIn</a>
-        · <a href="https://github.com/VincentXayasak" target="_blank" rel="noopener">GitHub</a>
-      </p>
+    <section id="contact" class="section contact">
+      <h2 class="section-title">Contact</h2>
+      <p class="contact-text">Have a question or want to work together? Reach out — I'd love to hear from you.</p>
+      <div class="contact-links">
+        <a href="mailto:xayasakvincent@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/vincentxayasak" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/VincentXayasak" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <p>&copy; 2026 Vincent Xayasak</p>
   </footer>
+
+  <script src="js/nav.js"></script>
 </body>
 </html>
