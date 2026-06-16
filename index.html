@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vincent Xayasak — ML and software engineering portfolio">
+  <title>Vincent Xayasak | Portfolio</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-logo">VX</a>
+      <ul class="nav-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="hero-eyebrow">ML &amp; Software Engineering</p>
+      <h1>Vincent Xayasak</h1>
+      <p class="hero-tagline">
+        Building LLM systems, evaluation pipelines, and production ML infrastructure.
+        B.S. Computer Science, UC Davis (2026).
+      </p>
+      <div class="hero-links">
+        <a href="https://github.com/VincentXayasak" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/vincentxayasak" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:xayasakvincent@gmail.com">Email</a>
+      </div>
+    </section>
+
+    <section id="projects" class="projects">
+      <h2>Selected Work</h2>
+      <p class="section-intro">Five projects spanning industry ML systems, research, and applied engineering.</p>
+
+      <div class="project-grid">
+        <article class="project-card project-card--featured">
+          <div class="project-card-meta">
+            <span class="badge badge--industry">Industry</span>
+            <span class="badge badge--confidential">Confidential</span>
+          </div>
+          <h3>LLM Systems for Semiconductor Test Automation</h3>
+          <p class="project-card-desc">
+            Fine-tuned Llama 3.3 70B, built a RAG pipeline, and deployed a production inference service
+            for Advantest's SmarTest8 platform — cutting firmware integration turnaround by ~90%.
+          </p>
+          <ul class="tag-list">
+            <li>QLoRA</li>
+            <li>RAG</li>
+            <li>FastAPI</li>
+            <li>Llama 3.3</li>
+          </ul>
+          <a href="projects/advantest.html" class="project-link">View case study →</a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card-meta">
+            <span class="badge badge--research">Research</span>
+            <span class="badge badge--submission">NeurIPS 2026 ED</span>
+          </div>
+          <h3>BRIDGE</h3>
+          <p class="project-card-desc">
+            19,421-sentence benchmark for register-stratified LLM bias evaluation — uncovering the
+            Register Polarity Flip across eight frontier models.
+          </p>
+          <ul class="tag-list">
+            <li>GRDC</li>
+            <li>Bias Eval</li>
+            <li>Hugging Face</li>
+            <li>Gemini API</li>
+          </ul>
+          <a href="projects/bridge.html" class="project-link">View case study →</a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card-meta">
+            <span class="badge badge--research">Research</span>
+            <span class="badge badge--submission">ACL 2026</span>
+          </div>
+          <h3>LLM Capability Is Not a Scalar</h3>
+          <p class="project-card-desc">
+            Two complementary metrics — RPC and PSF — revealing behavioral differences between
+            Pass@1-matched reasoning models across 16 models and 4 benchmarks.
+          </p>
+          <ul class="tag-list">
+            <li>RPC</li>
+            <li>PSF</li>
+            <li>Pass@k</li>
+            <li>PyTorch</li>
+          </ul>
+          <a href="projects/llm-capability.html" class="project-link">View case study →</a>
+        </article>
+
+        <article class="project-card project-card--coming-soon">
+          <div class="project-card-meta">
+            <span class="badge badge--hackathon">Hackathon</span>
+          </div>
+          <h3>Lil Sebastian</h3>
+          <p class="project-card-desc">Hackathon project. Coming soon.</p>
+        </article>
+
+        <article class="project-card project-card--coming-soon">
+          <div class="project-card-meta">
+            <span class="badge badge--academic">Academic</span>
+          </div>
+          <h3>Spotify Song Popularity Predictor</h3>
+          <p class="project-card-desc">Machine learning coursework project. Coming soon.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <h2>About</h2>
+      <p>
+        I'm an ML and software engineering graduate with experience in LLM fine-tuning, RAG systems,
+        model evaluation research, and production inference pipelines. My work spans semiconductor
+        test automation at Advantest and bias/reasoning evaluation research at UC Davis.
+      </p>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <p>
+        <a href="mailto:xayasakvincent@gmail.com">xayasakvincent@gmail.com</a>
+        · <a href="https://linkedin.com/in/vincentxayasak" target="_blank" rel="noopener">LinkedIn</a>
+        · <a href="https://github.com/VincentXayasak" target="_blank" rel="noopener">GitHub</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Vincent Xayasak</p>
+  </footer>
+</body>
+</html>

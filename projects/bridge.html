@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BRIDGE: Bias Register-Integrated Dataset for LLM bias evaluation — research case study">
+  <title>BRIDGE | Vincent Xayasak</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-logo">VX</a>
+      <ul class="nav-links">
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">← Back to portfolio</a>
+
+    <header class="case-study-header">
+      <div class="project-card-meta">
+        <span class="badge badge--research">Research</span>
+        <span class="badge badge--submission">NeurIPS 2026 ED</span>
+      </div>
+      <h1>BRIDGE: Bias Register-Integrated Dataset for Generalized Evaluation</h1>
+      <p class="case-study-subtitle">
+        Research Assistant at <strong>UC Davis</strong> · Davis, CA · January – May 2026
+      </p>
+    </header>
+
+    <div class="resource-bar">
+      <a href="../research/4002_BRIDGE_A_Bias_Register_In.pdf" target="_blank" rel="noopener">📄 Paper (PDF)</a>
+      <a href="https://huggingface.co/datasets/bridge-benchmark-2026/BRIDGE" target="_blank" rel="noopener">🤗 Dataset</a>
+      <a href="https://anonymous.4open.science/r/BRIDGE-0BA6/" target="_blank" rel="noopener">💻 Code</a>
+    </div>
+
+    <!-- Impact -->
+    <section class="case-section">
+      <h2>At a Glance</h2>
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-value">19,421</div>
+          <div class="impact-label">Labeled sentences across formal &amp; informal registers</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">DC=1.0</div>
+          <div class="impact-label">Directional consistency of Register Polarity Flip (p ≈ 6×10⁻⁵)</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">8</div>
+          <div class="impact-label">Frontier LLMs evaluated (GPT, Claude, Gemini, Llama, Qwen, …)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="case-section">
+      <h2>Problem</h2>
+      <p>
+        LLMs are increasingly deployed to audit institutional text — housing ordinances, legal contracts,
+        government reports — for discriminatory language. Yet nearly all bias benchmarks (BBQ, StereoSet,
+        CrowS-Pairs, ToxiGen, Social Bias Frames) are built from informal, social-media-style text.
+      </p>
+      <p>
+        This creates a structural mismatch: models evaluated on tweets are deployed on statutes. We
+        discovered that this mismatch produces a systematic failure mode called the <strong>Register
+        Polarity Flip (RPF)</strong> — models under-detect harmful bias in formal text while
+        over-flagging neutral informal text as harmful, with consistent directionality across all
+        eight frontier models tested.
+      </p>
+    </section>
+
+    <!-- BRIDGE dataset -->
+    <section class="case-section">
+      <h2>The BRIDGE Benchmark</h2>
+      <p>
+        BRIDGE (Bias Register-Integrated Dataset for Generalized Evaluation) is the first public
+        benchmark unifying formal institutional and informal social text under a shared three-way
+        taxonomy, assembled from seven open-source corpora spanning 150 years of US discourse.
+      </p>
+
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>Breakdown</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bias labels</td>
+              <td>Harmful (7,799) · Harmless (6,400) · Antibias (5,222)</td>
+            </tr>
+            <tr>
+              <td>Register</td>
+              <td>Formal (14,410) · Informal (5,011)</td>
+            </tr>
+            <tr>
+              <td>Source corpora</td>
+              <td>Pile of Law · Social Bias Frames · Jim Crow Laws · Redlining · GovReport · CAP · LSC Eviction Laws</td>
+            </tr>
+            <tr>
+              <td>Annotation agreement</td>
+              <td>Mean pairwise Cohen's κ = 0.82 (almost perfect)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- GRDC -->
+    <section class="case-section">
+      <h2>GRDC Diagnostic Suite</h2>
+      <p>
+        We designed GRDC — a five-metric framework for group-conditional bias evaluation that
+        generalizes to any categorical grouping variable (register, era, source, domain):
+      </p>
+
+      <ul class="contribution-list" style="margin-top: 1rem;">
+        <li>
+          <strong>Grouped Recall Divergence (GRD)</strong>
+          <p>Measures magnitude of recall disparity between groups. Global mean GRD = 0.271 across eight models.</p>
+        </li>
+        <li>
+          <strong>Directional Consistency (DC)</strong>
+          <p>Tests whether all models shift recall in the same direction. DC = 1.0 for both harmful and harmless classes simultaneously.</p>
+        </li>
+        <li>
+          <strong>Register Polarity Flip (RPF)</strong>
+          <p>Detects when models over-detect bias in one register while under-detecting in another — the core failure mode.</p>
+        </li>
+        <li>
+          <strong>Confusion Drift (CD)</strong>
+          <p>Localizes which misclassification cells change across register groups.</p>
+        </li>
+        <li>
+          <strong>Capability-Conditional Drift (CCD)</strong>
+          <p>Correlates model capability (macro-F1) with register divergence — stronger models may exhibit larger formal-register blindness.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Pipeline -->
+    <section class="case-section">
+      <h2>Evaluation Pipeline</h2>
+      <div class="arch-diagram">
+        <div class="arch-flow">
+          <div class="arch-node">7 Source<br>Corpora</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">Filter &amp;<br>Annotate</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">BRIDGE<br>19,421 ex.</div>
+        </div>
+        <div class="arch-flow" style="margin-top: 1rem;">
+          <div class="arch-node arch-node--accent">BRIDGE<br>Benchmark</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">8 Frontier<br>LLMs</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">GRDC<br>5 Metrics</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node">RPF<br>Diagnosis</div>
+        </div>
+        <p class="arch-caption">Benchmark curation and register-stratified evaluation framework</p>
+      </div>
+    </section>
+
+    <!-- Key findings -->
+    <section class="case-section">
+      <h2>Key Findings</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong>Register Polarity Flip is universal</strong>
+          <p>All eight frontier LLMs simultaneously miss harmful formal text (~45 recall points below informal) and over-flag neutral informal text (~30 recall points above formal), with DC = 1.0 (p ≈ 6×10⁻⁵).</p>
+        </li>
+        <li>
+          <strong>Replication on external data</strong>
+          <p>RPF replicates on an independent dataset (BABE + Measuring Hate Speech) with a larger effect (GRD = 0.504 vs. 0.271 on BRIDGE).</p>
+        </li>
+        <li>
+          <strong>Few-shot prompting does not fix it</strong>
+          <p>Register-stratified failures persist under few-shot and zero-shot prompting across racial, gender, and political bias dimensions.</p>
+        </li>
+        <li>
+          <strong>Model rankings shift with register mix</strong>
+          <p>Sensitivity analysis shows model leaderboards change at just 10% formal text composition — aggregate accuracy masks deployment-relevant failures.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- My contributions -->
+    <section class="case-section">
+      <h2>My Contributions</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong>Benchmark construction</strong>
+          <p>Built the 19,421-sentence dataset from seven open-source corpora spanning 150 years of discourse under a unified harmful/harmless/antibias taxonomy.</p>
+        </li>
+        <li>
+          <strong>Formal-text curation pipeline</strong>
+          <p>Curated formal-text datasets from Jim Crow Laws, Pile of Laws, and GovReport; engineered a Gemini API pipeline for policy categorization with expert-adjudicated manual verification.</p>
+        </li>
+        <li>
+          <strong>GRDC metric design</strong>
+          <p>Designed the five-metric GRDC diagnostic suite and identified the Register Polarity Flip failure mode across eight frontier LLMs.</p>
+        </li>
+        <li>
+          <strong>Model evaluation</strong>
+          <p>Executed few-shot and zero-shot evaluations measuring racial, gender, and political bias dimensions; validated RPF replication on independent external datasets.</p>
+        </li>
+        <li>
+          <strong>Co-authorship</strong>
+          <p>Co-authored paper submitted to NeurIPS 2026 Evaluations &amp; Datasets Track on register-stratified bias evaluation for institutional LLM auditing workflows.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Technologies -->
+    <section class="case-section">
+      <h2>Technologies</h2>
+      <div class="tech-grid">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">Hugging Face</span>
+        <span class="tech-pill">Gemini API</span>
+        <span class="tech-pill">Qwen 2.5</span>
+        <span class="tech-pill">GPT-5.4</span>
+        <span class="tech-pill">Claude 4.6</span>
+        <span class="tech-pill">Llama 3.1</span>
+        <span class="tech-pill">Parquet</span>
+        <span class="tech-pill">Cohen's κ</span>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section class="case-section">
+      <h2>Resources</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong><a href="../research/4002_BRIDGE_A_Bias_Register_In.pdf" target="_blank" rel="noopener">Research Paper (PDF)</a></strong>
+          <p>Full manuscript submitted to NeurIPS 2026 Evaluations &amp; Datasets Track.</p>
+        </li>
+        <li>
+          <strong><a href="https://huggingface.co/datasets/bridge-benchmark-2026/BRIDGE" target="_blank" rel="noopener">BRIDGE Dataset on Hugging Face</a></strong>
+          <p>19,421 examples with bias_label, register, era, source, and domain metadata. Released under license-preserving CC terms.</p>
+        </li>
+        <li>
+          <strong><a href="https://anonymous.4open.science/r/BRIDGE-0BA6/" target="_blank" rel="noopener">Evaluation Code (Anonymous Repo)</a></strong>
+          <p>Annotation pipeline, GRDC metric implementations, and few-shot/zero-shot evaluation scripts.</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Vincent Xayasak</p>
+  </footer>
+</body>
+</html>

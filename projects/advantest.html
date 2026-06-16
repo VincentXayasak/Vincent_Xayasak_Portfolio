@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Case study: LLM systems for semiconductor test automation at Advantest">
+  <title>Advantest Case Study | Vincent Xayasak</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-logo">VX</a>
+      <ul class="nav-links">
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">← Back to portfolio</a>
+
+    <header class="case-study-header">
+      <div class="project-card-meta">
+        <span class="badge badge--industry">Industry</span>
+        <span class="badge badge--confidential">Confidential</span>
+      </div>
+      <h1>LLM Systems for Semiconductor Test Automation</h1>
+      <p class="case-study-subtitle">
+        AI/ML Intern at <strong>Advantest</strong> · San Jose, CA · June – September 2025
+      </p>
+    </header>
+
+    <div class="confidential-notice">
+      <span>🔒</span>
+      <p>
+        <strong>Confidential work.</strong>
+        This project involved proprietary SmarTest8 and V93000 systems. No source code,
+        screenshots, or internal documentation can be shared. This case study describes
+        the problem, approach, and measurable outcomes at a high level.
+      </p>
+    </div>
+
+    <!-- Impact -->
+    <section class="case-section">
+      <h2>Impact at a Glance</h2>
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-value">~90%</div>
+          <div class="impact-label">Reduction in firmware integration turnaround (1 week → 5 hours)</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">12×</div>
+          <div class="impact-label">VRAM scale-up after proof-of-concept (4 GB → 48 GB)</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">70B</div>
+          <div class="impact-label">Parameter model fine-tuned via QLoRA for domain syntax</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Context -->
+    <section class="case-section">
+      <h2>Context</h2>
+      <p>
+        Advantest is a global leader in semiconductor test equipment. Their SmarTest8 platform
+        powers validation workflows on the V93000 tester architecture — a complex domain with
+        specialized syntax, hardware specification documents, and strict compliance requirements.
+      </p>
+      <p>
+        Engineers routinely spent significant time writing and integrating firmware scripts and
+        retrieving hardware specifications from dense technical documentation. My internship focused
+        on applying modern LLM techniques to accelerate these workflows while maintaining accuracy
+        and adherence to validation standards.
+      </p>
+    </section>
+
+    <!-- Problem -->
+    <section class="case-section">
+      <h2>Problem</h2>
+      <p>
+        Three bottlenecks defined the engineering workflow:
+      </p>
+      <ul class="contribution-list" style="margin-top: 1rem;">
+        <li>
+          <strong>Domain-specific code generation</strong>
+          <p>General-purpose LLMs hallucinated SmarTest8 syntax and produced scripts incompatible with the V93000 architecture.</p>
+        </li>
+        <li>
+          <strong>Specification retrieval</strong>
+          <p>Hardware specs lived across lengthy, unstructured documents — manual lookup was slow and error-prone.</p>
+        </li>
+        <li>
+          <strong>Production inference constraints</strong>
+          <p>Multiple engineers needed concurrent access to large models without saturating GPU resources or degrading latency.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Architecture -->
+    <section class="case-section">
+      <h2>System Architecture</h2>
+      <p>A three-layer system was built to address each bottleneck:</p>
+
+      <div class="arch-diagram" style="margin-top: 1.25rem;">
+        <div class="arch-flow">
+          <div class="arch-node">Engineer<br>Request</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">FastAPI<br>Queue</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">Fine-tuned<br>Llama 3.3 70B</div>
+        </div>
+        <div class="arch-flow" style="margin-top: 1rem;">
+          <div class="arch-node">Spec<br>Documents</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">BGE-M3<br>Embeddings</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">Vector<br>Retrieval</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">RAG<br>Context</div>
+        </div>
+        <p class="arch-caption">High-level architecture — proprietary implementation details omitted</p>
+      </div>
+    </section>
+
+    <!-- Contributions -->
+    <section class="case-section">
+      <h2>Key Contributions</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong>Domain fine-tuning with QLoRA</strong>
+          <p>
+            Fine-tuned Llama 3.3 70B on SmarTest8 syntax using QLoRA, starting from a 4 GB
+            proof-of-concept and scaling to 48 GB VRAM after demonstrating high-impact results
+            to the team.
+          </p>
+        </li>
+        <li>
+          <strong>RAG pipeline for specification retrieval</strong>
+          <p>
+            Engineered a retrieval-augmented generation pipeline using BAAI/bge-m3 embeddings
+            to ground model outputs in actual hardware documentation — eliminating hallucinations
+            and accelerating spec lookup.
+          </p>
+        </li>
+        <li>
+          <strong>Production inference service</strong>
+          <p>
+            Deployed a local FastAPI web service with a custom request queue to manage concurrent
+            inference requests and optimize model throughput across multiple engineers.
+          </p>
+        </li>
+        <li>
+          <strong>Firmware integration automation</strong>
+          <p>
+            Built LLM-driven scripts that automated firmware integration workflows, reducing
+            engineering turnaround from approximately one week to five hours.
+          </p>
+        </li>
+        <li>
+          <strong>Validation standards documentation</strong>
+          <p>
+            Synthesized technical documentation for semiconductor validation standards, ensuring
+            AI-generated automation adhered to V93000/SmarTest8 architecture requirements.
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Tech stack -->
+    <section class="case-section">
+      <h2>Technologies</h2>
+      <div class="tech-grid">
+        <span class="tech-pill">Llama 3.3 70B</span>
+        <span class="tech-pill">QLoRA / PEFT</span>
+        <span class="tech-pill">BAAI/bge-m3</span>
+        <span class="tech-pill">RAG</span>
+        <span class="tech-pill">ChromaDB</span>
+        <span class="tech-pill">FastAPI</span>
+        <span class="tech-pill">CUDA</span>
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">Hugging Face</span>
+        <span class="tech-pill">PyTorch</span>
+      </div>
+    </section>
+
+    <!-- Takeaways -->
+    <section class="case-section">
+      <h2>Takeaways</h2>
+      <p>
+        This internship taught me how to take LLM research techniques — fine-tuning, RAG,
+        quantization — and ship them as production systems that real engineers depend on daily.
+        The biggest lesson was balancing model capability with infrastructure constraints:
+        a working 4 GB proof-of-concept earned the trust to scale to a full 70B deployment.
+      </p>
+      <p>
+        Working under confidentiality also reinforced how to communicate technical impact
+        clearly without exposing proprietary details — a skill directly applicable to any
+        industry ML role.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Vincent Xayasak</p>
+  </footer>
+</body>
+</html>

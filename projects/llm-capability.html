@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LLM Capability Is Not a Scalar — RPC and PSF for multi-dimensional reasoning model evaluation">
+  <title>LLM Capability Is Not a Scalar | Vincent Xayasak</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-logo">VX</a>
+      <ul class="nav-links">
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <a href="../index.html" class="back-link">← Back to portfolio</a>
+
+    <header class="case-study-header">
+      <div class="project-card-meta">
+        <span class="badge badge--research">Research</span>
+        <span class="badge badge--submission">ACL 2026</span>
+      </div>
+      <h1>LLM Capability Is Not a Scalar</h1>
+      <p class="case-study-subtitle">
+        Measuring the Shape of Reasoning-Model Behavior with Path Consistency and Sampling Fingerprints ·
+        <strong>UC Davis</strong> · January – May 2026
+      </p>
+    </header>
+
+    <div class="resource-bar">
+      <a href="../research/12548_LLM_Capability_Is_Not_a_%20(1).pdf" target="_blank" rel="noopener">📄 Paper (PDF)</a>
+      <a href="../LLM_Capability_Is_Not_a%20Scalar_Software/README.md" target="_blank" rel="noopener">💻 Analysis Pipeline</a>
+    </div>
+
+    <!-- Impact -->
+    <section class="case-section">
+      <h2>At a Glance</h2>
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-value">16</div>
+          <div class="impact-label">Reasoning models evaluated across 4 benchmarks (k = 4 attempts each)</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">0.17</div>
+          <div class="impact-label">Max semantic RPC gap between Pass@1-matched models</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">R²=0.96</div>
+          <div class="impact-label">Mean PSF curve fit quality across non-degenerate model–benchmark pairs</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="case-section">
+      <h2>Problem</h2>
+      <p>
+        Reasoning models are compared almost entirely by a single number — Pass@1 accuracy on a benchmark.
+        But this scalar is a lossy projection: two models tied on Pass@1 can behave entirely differently
+        underneath.
+      </p>
+      <p>
+        On a law-reasoning benchmark, Claude-4.5-Sonnet and Gemini-2.5-Pro differ by less than half a
+        percentage point on Pass@1 — yet their reasoning-path consistency differs by 0.17 on a 0–1 scale.
+        On mathematics, GPT-OSS-120B and GPT-5-mini are likewise tied on Pass@1, but by the fourth attempt
+        their accuracies differ by more than ten points. The scalar says they are equal; the behavior says they are not.
+      </p>
+      <p>
+        <strong>Capability is not a scalar — it has a shape.</strong> We introduce two complementary instruments
+        to measure that shape.
+      </p>
+    </section>
+
+    <!-- RPC -->
+    <section class="case-section">
+      <h2>Reasoning Path Consistency (RPC)</h2>
+      <p>
+        Given a model's four reasoning traces on the same problem, RPC measures how similar those paths are
+        across three complementary axes:
+      </p>
+
+      <ul class="contribution-list" style="margin-top: 1rem;">
+        <li>
+          <strong>RPC-L (lexical)</strong>
+          <p>Token n-gram overlap (n = 3) capturing surface-level phrasing reuse across attempts.</p>
+        </li>
+        <li>
+          <strong>RPC-S (structural)</strong>
+          <p>Similarity of step-type sequences (reasoning, tool call, observation) — whether the model organizes its solution the same way.</p>
+        </li>
+        <li>
+          <strong>RPC-Sem (semantic)</strong>
+          <p>Mean pairwise cosine similarity of sentence embeddings (all-MiniLM-L6-v2). Primary axis, validated against human judgments (Spearman ρ = 0.34, n = 50, p = 0.017).</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- PSF -->
+    <section class="case-section">
+      <h2>Parametric Sampling Fingerprints (PSF)</h2>
+      <p>
+        PSF fits a three-parameter saturation curve to each model's empirical Pass@k trajectory (k = 1…4):
+      </p>
+
+      <div class="formula-block">
+        Pass@k = α + (β − α) · (1 − e<sup>−γ(k−1)</sup>)
+      </div>
+
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Meaning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>α</td>
+              <td>First-attempt accuracy (Pass@1)</td>
+            </tr>
+            <tr>
+              <td>β</td>
+              <td>Saturation ceiling — maximum accuracy approached as k grows</td>
+            </tr>
+            <tr>
+              <td>γ</td>
+              <td>Approach rate — how quickly additional samples convert to correct answers</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top: 1rem;">
+        The triple (α, β, γ) is a compact fingerprint of sampling behavior, making two models directly
+        comparable even when their Pass@1 is identical. Mean R² = 0.96 across non-degenerate fits.
+      </p>
+    </section>
+
+    <!-- Pipeline -->
+    <section class="case-section">
+      <h2>Evaluation Pipeline</h2>
+      <div class="arch-diagram">
+        <div class="arch-flow">
+          <div class="arch-node">16 Models ×<br>4 Benchmarks</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">k = 4<br>Attempts</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node">Traces +<br>Labels</div>
+        </div>
+        <div class="arch-flow" style="margin-top: 1rem;">
+          <div class="arch-node arch-node--accent">Reasoning<br>Traces</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">RPC<br>L · S · Sem</div>
+        </div>
+        <div class="arch-flow" style="margin-top: 1rem;">
+          <div class="arch-node arch-node--accent">Correctness<br>Labels</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">PSF<br>α · β · γ</div>
+        </div>
+        <p class="arch-caption">Two independent instruments from the same repeated-attempt data</p>
+      </div>
+    </section>
+
+    <!-- Benchmarks -->
+    <section class="case-section">
+      <h2>Benchmarks</h2>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Domain</th>
+              <th>Benchmark</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Law</td>
+              <td>AGIEval LSAT Analytical Reasoning</td>
+            </tr>
+            <tr>
+              <td>Mathematics</td>
+              <td>AIME 2025</td>
+            </tr>
+            <tr>
+              <td>Graduate Science</td>
+              <td>GPQA Diamond</td>
+            </tr>
+            <tr>
+              <td>Multi-modal</td>
+              <td>MMMU (Accounting, Clinical Medicine, Finance)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Key findings -->
+    <section class="case-section">
+      <h2>Key Findings</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong>Pass@1-matched models diverge in reasoning consistency</strong>
+          <p>Semantic RPC gaps up to 0.17 between models with nearly identical first-attempt accuracy — overwhelmingly statistically significant.</p>
+        </li>
+        <li>
+          <strong>Pass@1-matched models diverge in sampling behavior</strong>
+          <p>Pass@4 gaps up to 10 percentage points — one model saturates immediately while another keeps improving with more samples.</p>
+        </li>
+        <li>
+          <strong>RPC and PSF are statistically independent</strong>
+          <p>|r| ≤ 0.14 between PSF parameters and RPC axes — reasoning consistency and sampling trajectory capture distinct dimensions, not two views of the same signal.</p>
+        </li>
+        <li>
+          <strong>Behavior shape is domain-conditional</strong>
+          <p>A model's fingerprint changes across reasoning domains, most strongly in structural organization of its reasoning paths.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Software -->
+    <section class="case-section">
+      <h2>Analysis Pipeline</h2>
+      <p>
+        I built a Python analysis pipeline (<code>squadc</code> CLI) that processes multi-attempt benchmark
+        outputs end-to-end:
+      </p>
+      <ul class="contribution-list" style="margin-top: 1rem;">
+        <li>
+          <strong>Data cleaning &amp; verification</strong>
+          <p>Streaming dataloader and validation scripts for AGIEval, AIME, GPQA, and MMMU benchmark outputs with attempt-level correctness extraction.</p>
+        </li>
+        <li>
+          <strong>RPC computation</strong>
+          <p>Separate modules for lexical n-gram overlap (RPC-L), structural step-sequence similarity via LCS (RPC-S), and semantic embedding cosine similarity (RPC-Sem).</p>
+        </li>
+        <li>
+          <strong>PSF fitting</strong>
+          <p>Pass@k estimation, three-parameter curve fitting with bootstrap confidence intervals, and matched-Pass@1 pair analysis with distribution artifacts.</p>
+        </li>
+        <li>
+          <strong>Cross-analysis &amp; experiments</strong>
+          <p>PSF clustering in (α, β, γ) space, RPC–PSF independence checks, and five reproducibility experiments (R1–R5) with CDF plots and paper-ready summaries.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- My contributions -->
+    <section class="case-section">
+      <h2>My Contributions</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong>RPC metric design</strong>
+          <p>Introduced Reasoning Path Consistency — a three-axis measure of reasoning-path similarity across repeated attempts, with semantic axis validated against human judgments (Spearman ρ = 0.34).</p>
+        </li>
+        <li>
+          <strong>PSF metric design</strong>
+          <p>Developed Parametric Sampling Fingerprints fitting Pass@k trajectories with three-parameter saturation curves (mean R² = 0.96).</p>
+        </li>
+        <li>
+          <strong>Large-scale evaluation</strong>
+          <p>Evaluated 16 reasoning models across four benchmarks; demonstrated Pass@1-matched models diverge up to 0.17 in semantic RPC and 10 points on Pass@4.</p>
+        </li>
+        <li>
+          <strong>Independence analysis</strong>
+          <p>Demonstrated RPC and PSF are statistically independent — capturing distinct dimensions of model behavior that scalar Pass@1 conceals.</p>
+        </li>
+        <li>
+          <strong>Co-authorship</strong>
+          <p>Co-authored paper submitted to ACL on multi-dimensional LLM capability measurement beyond single-number benchmark accuracy.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Technologies -->
+    <section class="case-section">
+      <h2>Technologies</h2>
+      <div class="tech-grid">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">PyTorch</span>
+        <span class="tech-pill">all-MiniLM-L6-v2</span>
+        <span class="tech-pill">NumPy</span>
+        <span class="tech-pill">Pandas</span>
+        <span class="tech-pill">SciPy</span>
+        <span class="tech-pill">Bootstrap CI</span>
+        <span class="tech-pill">K-Means</span>
+        <span class="tech-pill">Spearman ρ</span>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section class="case-section">
+      <h2>Resources</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong><a href="../research/12548_LLM_Capability_Is_Not_a_%20(1).pdf" target="_blank" rel="noopener">Research Paper (PDF)</a></strong>
+          <p>Full manuscript submitted to ACL 2026.</p>
+        </li>
+        <li>
+          <strong><a href="../LLM_Capability_Is_Not_a%20Scalar_Software/README.md" target="_blank" rel="noopener">Analysis Pipeline (Source)</a></strong>
+          <p>Data cleaning, RPC/PSF computation, CLI pipeline (<code>squadc</code>), clustering, and reproducibility experiments.</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Vincent Xayasak</p>
+  </footer>
+</body>
+</html>
