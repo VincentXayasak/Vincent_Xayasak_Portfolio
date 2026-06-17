@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Spotify Song Popularity Predictor — ML regression project predicting track popularity from audio features">
+  <title>Spotify Song Popularity Predictor | Vincent Xayasak</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-logo">VX</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="case-study-main">
+    <a href="../index.html" class="back-link">← Back to portfolio</a>
+
+    <header class="case-study-header">
+      <div class="project-card-meta">
+        <span class="badge badge--academic">Academic</span>
+      </div>
+      <h1>Spotify Song Popularity Predictor</h1>
+      <p class="case-study-subtitle">
+        Machine learning final project — predicting how popular a song would be on Spotify using
+        15 audio features and genre, with a deployed Hugging Face demo.
+      </p>
+    </header>
+
+    <div class="resource-bar">
+      <a href="https://github.com/VincentXayasak/Spotify-Song-Popularity-Predictor" target="_blank" rel="noopener">💻 GitHub</a>
+      <a href="https://huggingface.co/spaces/vincentxayasak/Spotify_Song_Popularity_Predictor" target="_blank" rel="noopener">🤗 Live Demo</a>
+      <a href="https://drive.google.com/file/d/1R9Ig3bgpHp4_LSSE4HgP7MjVzPTzZALD/view?usp=sharing" target="_blank" rel="noopener">▶ Demo Video</a>
+    </div>
+
+    <section class="case-section">
+      <h2>At a Glance</h2>
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-value">91K+</div>
+          <div class="impact-label">Spotify tracks in the cleaned training dataset</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">0.70</div>
+          <div class="impact-label">Test R² with tuned XGBoost — best-performing model</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">15</div>
+          <div class="impact-label">Audio features + genre used as model inputs</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>Problem</h2>
+      <p>
+        Spotify's popularity score (0–100) reflects how often a track is streamed relative to
+        other songs — but what makes a song popular? Can audio characteristics alone predict
+        success before a track is released?
+      </p>
+      <p>
+        This project explores that question by building regression models that predict track
+        popularity from measurable audio features — danceability, energy, tempo, genre, and more —
+        without relying on artist name or marketing data.
+      </p>
+    </section>
+
+    <section class="case-section">
+      <h2>Features</h2>
+      <p>The model uses 15 inputs drawn from Spotify's audio analysis API:</p>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Features</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Audio</td>
+              <td>danceability, energy, loudness, speechiness, acousticness, instrumentalness, liveness, valence, tempo</td>
+            </tr>
+            <tr>
+              <td>Metadata</td>
+              <td>duration (ms), explicit, key, mode, time signature</td>
+            </tr>
+            <tr>
+              <td>Categorical</td>
+              <td>track genre (one-hot encoded)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>ML Pipeline</h2>
+      <div class="arch-diagram">
+        <div class="arch-flow">
+          <div class="arch-node">Raw<br>Dataset</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">EDA &amp;<br>Cleaning</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">Feature<br>Engineering</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">Model<br>Comparison</div>
+        </div>
+        <div class="arch-flow" style="margin-top: 1rem;">
+          <div class="arch-node arch-node--accent">Bayesian<br>Hyperparameter Tuning</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">XGBoost<br>Best Model</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node">Hugging Face<br>Demo</div>
+        </div>
+        <p class="arch-caption">From raw Spotify data to deployed prediction interface</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>Models Compared</h2>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Test R²</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Linear Regression</td>
+              <td>~0.60</td>
+              <td>5-fold cross-validation baseline</td>
+            </tr>
+            <tr>
+              <td>Decision Tree</td>
+              <td>~0.56</td>
+              <td>Bayesian hyperparameter search</td>
+            </tr>
+            <tr>
+              <td>Random Forest</td>
+              <td>~0.59</td>
+              <td>Bayesian optimization (1-hour run)</td>
+            </tr>
+            <tr>
+              <td>Bagging Regressor</td>
+              <td>~0.69</td>
+              <td>Strong fit with some overfitting</td>
+            </tr>
+            <tr>
+              <td>LightGBM</td>
+              <td>~0.70</td>
+              <td>Bayesian-tuned gradient boosting</td>
+            </tr>
+            <tr>
+              <td>XGBoost</td>
+              <td>~0.70</td>
+              <td>Best overall — selected for deployment</td>
+            </tr>
+            <tr>
+              <td>Neural Network</td>
+              <td>~0.63</td>
+              <td>TensorFlow/Keras dense layers</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top: 1rem;">
+        Tree-based ensemble methods significantly outperformed linear regression, with XGBoost and
+        LightGBM reaching ~0.70 test R². Bayesian optimization via <code>scikit-optimize</code>
+        was used to tune hyperparameters for the top candidates.
+      </p>
+    </section>
+
+    <section class="case-section">
+      <h2>Exploratory Data Analysis</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong>Popularity distribution</strong>
+          <p>Analyzed track popularity histograms, filtering zero-popularity tracks and handling missing values across ~91K records.</p>
+        </li>
+        <li>
+          <strong>Feature distributions &amp; outliers</strong>
+          <p>Box plots and distribution charts for all 14 numerical audio features to identify skew and outliers.</p>
+        </li>
+        <li>
+          <strong>Release date enrichment</strong>
+          <p>Built a custom scraper notebook to merge release dates onto tracks for temporal analysis.</p>
+        </li>
+        <li>
+          <strong>Residual analysis</strong>
+          <p>Residual vs. predicted plots, Q-Q plots, and per-genre error breakdowns to validate model assumptions.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="case-section">
+      <h2>Deployment</h2>
+      <p>
+        The final XGBoost model was deployed as an interactive Hugging Face Space where users
+        can input audio features and get a predicted popularity score. A demo video walks through
+        the full workflow from data to prediction.
+      </p>
+      <ul class="contribution-list" style="margin-top: 1rem;">
+        <li>
+          <strong><a href="https://huggingface.co/spaces/vincentxayasak/Spotify_Song_Popularity_Predictor" target="_blank" rel="noopener">Hugging Face Space</a></strong>
+          <p>Live web interface for popularity prediction.</p>
+        </li>
+        <li>
+          <strong><a href="https://drive.google.com/file/d/1R9Ig3bgpHp4_LSSE4HgP7MjVzPTzZALD/view?usp=sharing" target="_blank" rel="noopener">Demo Video</a></strong>
+          <p>Walkthrough of the project and prediction interface.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="case-section">
+      <h2>My Contributions</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong>End-to-end ML project</strong>
+          <p>Designed and executed the full pipeline — EDA, cleaning, feature engineering, model comparison, hyperparameter tuning, and deployment.</p>
+        </li>
+        <li>
+          <strong>Model benchmarking</strong>
+          <p>Compared seven regression approaches from linear models to gradient boosting and neural networks, with rigorous cross-validation and Bayesian optimization.</p>
+        </li>
+        <li>
+          <strong>Data engineering</strong>
+          <p>Cleaned and merged a 91K-track dataset, built a release-date scraper, and created tooling (<code>RandomSongChooser.py</code>) for generating unseen test samples.</p>
+        </li>
+        <li>
+          <strong>Deployment &amp; documentation</strong>
+          <p>Published a Hugging Face demo, recorded a walkthrough video, and wrote a final report (<em>How To Make A Hit Song On Spotify Using Machine Learning</em>).</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="case-section">
+      <h2>Technologies</h2>
+      <div class="tech-grid">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">scikit-learn</span>
+        <span class="tech-pill">XGBoost</span>
+        <span class="tech-pill">LightGBM</span>
+        <span class="tech-pill">TensorFlow</span>
+        <span class="tech-pill">BayesSearchCV</span>
+        <span class="tech-pill">Pandas</span>
+        <span class="tech-pill">Seaborn</span>
+        <span class="tech-pill">Hugging Face</span>
+        <span class="tech-pill">Jupyter</span>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>Resources</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong><a href="https://github.com/VincentXayasak/Spotify-Song-Popularity-Predictor" target="_blank" rel="noopener">GitHub Repository</a></strong>
+          <p>Notebooks, cleaned dataset, model code, and final report PDF.</p>
+        </li>
+        <li>
+          <strong><a href="https://huggingface.co/spaces/vincentxayasak/Spotify_Song_Popularity_Predictor" target="_blank" rel="noopener">Hugging Face Space</a></strong>
+          <p>Interactive popularity predictor demo.</p>
+        </li>
+        <li>
+          <strong><a href="https://drive.google.com/file/d/1R9Ig3bgpHp4_LSSE4HgP7MjVzPTzZALD/view?usp=sharing" target="_blank" rel="noopener">Demo Video</a></strong>
+          <p>Project walkthrough and model demonstration.</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Vincent Xayasak</p>
+  </footer>
+  <script src="../js/nav.js"></script>
+</body>
+</html>

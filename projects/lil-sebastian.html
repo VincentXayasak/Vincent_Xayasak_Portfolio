@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lil Sebastian — AI-powered podcast app that turns local government meetings into engaging audio episodes">
+  <title>Lil Sebastian | Vincent Xayasak</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-logo">VX</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="case-study-main">
+    <a href="../index.html" class="back-link">← Back to portfolio</a>
+
+    <header class="case-study-header">
+      <div class="project-card-meta">
+        <span class="badge badge--hackathon">Hackathon</span>
+      </div>
+      <h1>Lil Sebastian</h1>
+      <p class="case-study-subtitle">
+        A podcast app and website that transforms dry local government meeting recordings into
+        funny, engaging audio episodes citizens actually want to listen to.
+      </p>
+    </header>
+
+    <div class="resource-bar">
+      <a href="https://github.com/VincentXayasak/Lil_Sebastian" target="_blank" rel="noopener">💻 GitHub</a>
+    </div>
+
+    <section class="case-section">
+      <h2>At a Glance</h2>
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-value">7</div>
+          <div class="impact-label">Step AI pipeline from raw video to published podcast episode</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">2</div>
+          <div class="impact-label">Platforms — React Native mobile app + citizen-facing website</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">4</div>
+          <div class="impact-label">AI-generated podcast characters with distinct voices</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>Problem</h2>
+      <p>
+        Local government meetings — city council, planning commission, school board — are public
+        record, but almost no one watches them. Hours of dry footage sit unwatched while decisions
+        that affect housing, zoning, and budgets go unnoticed by the people they impact.
+      </p>
+      <p>
+        Lil Sebastian solves this by turning meeting recordings into short, entertaining podcast
+        episodes. Government workers upload a video; citizens browse and listen by city — no need
+        to sit through raw footage.
+      </p>
+    </section>
+
+    <section class="case-section">
+      <h2>How It Works</h2>
+      <div class="arch-diagram">
+        <div class="arch-flow">
+          <div class="arch-node">Video<br>Upload</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">ffmpeg<br>M4A</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">ElevenLabs<br>Transcribe</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">Gemini<br>Script</div>
+        </div>
+        <div class="arch-flow" style="margin-top: 1rem;">
+          <div class="arch-node arch-node--accent">ElevenLabs<br>Multi-voice TTS</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">Supabase<br>Storage</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node">App &amp;<br>Website</div>
+        </div>
+        <p class="arch-caption">End-to-end pipeline from government upload to citizen playback</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>The Product</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong>Citizen experience</strong>
+          <p>Browse episodes by city, search for a town, listen to recent meetings, and track recently played — available on mobile (Expo/React Native) and web.</p>
+        </li>
+        <li>
+          <strong>Government worker portal</strong>
+          <p>Upload meeting videos through the website to kick off the automated podcast generation pipeline.</p>
+        </li>
+        <li>
+          <strong>AI podcast cast</strong>
+          <p>Four distinct characters — Narrator, Ben, Leslie, and Patrick — each with their own ElevenLabs voice, turning dry transcripts into conversational episodes.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="case-section">
+      <h2>Pipeline Details</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong>Audio conversion</strong>
+          <p>Meeting videos are converted to M4A via ffmpeg for downstream transcription.</p>
+        </li>
+        <li>
+          <strong>Transcription</strong>
+          <p>ElevenLabs speech-to-text produces a full transcript of the meeting audio.</p>
+        </li>
+        <li>
+          <strong>Script generation</strong>
+          <p>Google Gemini rewrites the transcript into an engaging multi-character podcast script with dialogue, transitions, and humor.</p>
+        </li>
+        <li>
+          <strong>Multi-voice synthesis</strong>
+          <p>A Python pipeline parses the script, assigns voices per character via <code>voice_map.json</code>, and stitches dialogue into a final MP3 using ElevenLabs TTS and pydub.</p>
+        </li>
+        <li>
+          <strong>Distribution</strong>
+          <p>Finished episodes are uploaded to Supabase Storage and surfaced in the app and website for citizens to stream.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="case-section">
+      <h2>Architecture</h2>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Stack</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mobile app</td>
+              <td>Expo · React Native · TypeScript · expo-av</td>
+            </tr>
+            <tr>
+              <td>Website</td>
+              <td>HTML · CSS · JavaScript</td>
+            </tr>
+            <tr>
+              <td>Podcast pipeline</td>
+              <td>Python · ElevenLabs · Gemini · ffmpeg · pydub</td>
+            </tr>
+            <tr>
+              <td>Backend / storage</td>
+              <td>Supabase (storage + API)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>My Contributions</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong>End-to-end AI pipeline</strong>
+          <p>Built the seven-step automation from video upload through transcription, script generation, multi-voice TTS, and MP3 publishing to Supabase.</p>
+        </li>
+        <li>
+          <strong>Podcast synthesis engine</strong>
+          <p>Developed the Python <code>podcast_creator</code> module — script parsing, per-character voice mapping, audio stitching, and fallback handling for sound effects.</p>
+        </li>
+        <li>
+          <strong>Mobile app</strong>
+          <p>Built the Expo/React Native app for citizens to browse episodes by city, stream audio, and track listening history.</p>
+        </li>
+        <li>
+          <strong>Web portal</strong>
+          <p>Created the citizen-facing website and government worker upload interface.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="case-section">
+      <h2>Technologies</h2>
+      <div class="tech-grid">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">React Native</span>
+        <span class="tech-pill">Expo</span>
+        <span class="tech-pill">TypeScript</span>
+        <span class="tech-pill">ElevenLabs</span>
+        <span class="tech-pill">Google Gemini</span>
+        <span class="tech-pill">Supabase</span>
+        <span class="tech-pill">ffmpeg</span>
+        <span class="tech-pill">pydub</span>
+        <span class="tech-pill">JavaScript</span>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>Resources</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong><a href="https://github.com/VincentXayasak/Lil_Sebastian" target="_blank" rel="noopener">GitHub Repository</a></strong>
+          <p>Full source — mobile app, website, podcast pipeline, and automation scripts.</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Vincent Xayasak</p>
+  </footer>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
