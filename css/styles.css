@@ -266,19 +266,41 @@ main { overflow-x: hidden; }
 
 .project-card-thumb {
   height: 140px;
+  width: 100%;
+  flex-shrink: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   font-size: 2.5rem;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: rgba(255, 255, 255, 0.9);
+  color: #ffffff;
+  background-color: #16a34a;
+  background-image: linear-gradient(135deg, #166534 0%, #16a34a 100%);
 }
 
-.project-card-thumb--industry  { background: linear-gradient(135deg, #166534, #22c55e); }
-.project-card-thumb--research  { background: linear-gradient(135deg, #14532d, #4ade80); }
-.project-card-thumb--hackathon { background: linear-gradient(135deg, #92400e, #fbbf24); }
-.project-card-thumb--academic  { background: linear-gradient(135deg, #5b21b6, #a78bfa); }
+.project-card-thumb--industry  { background-color: #166534; background-image: linear-gradient(135deg, #166534, #22c55e); }
+.project-card-thumb--research  { background-color: #14532d; background-image: linear-gradient(135deg, #14532d, #4ade80); }
+.project-card-thumb--hackathon { background-color: #92400e; background-image: linear-gradient(135deg, #92400e, #fbbf24); }
+.project-card-thumb--academic  { background-color: #5b21b6; background-image: linear-gradient(135deg, #5b21b6, #a78bfa); }
+.project-card-thumb--applied   { background-color: #166534; background-image: linear-gradient(135deg, #166534, #16a34a); }
+
+.thumb-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  color: #ffffff;
+}
+
+.thumb-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
 
 .project-card-body {
   padding: 1.5rem;
@@ -309,6 +331,7 @@ main { overflow-x: hidden; }
 .badge--academic     { background: #f5f3ff; color: var(--purple); }
 .badge--confidential { background: #fef2f2; color: var(--red); }
 .badge--submission   { background: #f5f3ff; color: var(--purple); }
+.badge--applied     { background: #dcfce7; color: #15803d; }
 
 .project-card h3 {
   font-size: 1.15rem;

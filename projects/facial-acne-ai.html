@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Facial Acne AI — research-grounded local RAG assistant with Qwen2.5-VL vision for acne Q&A">
+  <title>Facial Acne AI | Vincent Xayasak</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="../index.html" class="nav-logo">VX</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <ul class="nav-links">
+        <li><a href="../index.html#home">Home</a></li>
+        <li><a href="../index.html#about">About</a></li>
+        <li><a href="../index.html#projects">Projects</a></li>
+        <li><a href="../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="case-study-main">
+    <a href="../index.html" class="back-link">← Back to portfolio</a>
+
+    <header class="case-study-header">
+      <div class="project-card-meta">
+        <span class="badge badge--applied">Applied AI</span>
+      </div>
+      <h1>Facial Acne AI</h1>
+      <p class="case-study-subtitle">
+        A research-grounded facial acne assistant — <strong>Qwen2.5-VL 7B</strong> analyzes face photos,
+        <strong>RAG</strong> over ingested dermatology papers powers citations, and everything runs
+        locally via LM Studio with no cloud APIs.
+      </p>
+    </header>
+
+    <div class="resource-bar">
+      <a href="https://github.com/VincentXayasak/Facial-Acne-AI" target="_blank" rel="noopener">💻 GitHub</a>
+    </div>
+
+    <div class="confidential-notice" style="background: #f0fdf4; border-color: #bbf7d0;">
+      <span>ℹ️</span>
+      <p>
+        <strong>Educational use only.</strong>
+        This tool does not diagnose, prescribe, or replace care from a licensed clinician.
+        See a dermatologist for medical concerns.
+      </p>
+    </div>
+
+    <section class="case-section">
+      <h2>At a Glance</h2>
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-value">4.6</div>
+          <div class="impact-label">RAG groundedness score (vs. 2.5 base) — human eval, 1–5 scale</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">100%</div>
+          <div class="impact-label">Citation accuracy — 28 of 28 audited claims verified against sources</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-value">0</div>
+          <div class="impact-label">Cloud API calls — fully local via LM Studio</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>Problem</h2>
+      <p>
+        General-purpose LLMs can answer skincare questions, but their responses are often ungrounded —
+        no citations, no tie to clinical literature, and no ability to analyze what they actually see
+        in a photo. For acne specifically, users need answers that combine visual observation with
+        evidence from dermatology research.
+      </p>
+      <p>
+        Facial Acne AI addresses this with a local multimodal pipeline: a vision-language model
+        structures observations from face photos, a RAG system retrieves relevant paper excerpts,
+        and the same model synthesizes a grounded answer with numbered citations.
+      </p>
+    </section>
+
+    <section class="case-section">
+      <h2>How It Works</h2>
+      <div class="arch-diagram">
+        <div class="arch-flow">
+          <div class="arch-node">Face<br>Photo</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">Qwen2.5-VL<br>Vision</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">Structured<br>Observation</div>
+        </div>
+        <div class="arch-flow" style="margin-top: 1rem;">
+          <div class="arch-node">User<br>Question</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">BGE +<br>ChromaDB</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">Research<br>Excerpts</div>
+        </div>
+        <div class="arch-flow" style="margin-top: 1rem;">
+          <div class="arch-node arch-node--accent">Observation +<br>Chunks + Question</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node arch-node--accent">Qwen2.5-VL<br>Chat</div>
+          <span class="arch-arrow">→</span>
+          <div class="arch-node">Grounded<br>Answer</div>
+        </div>
+        <p class="arch-caption">Multimodal RAG pipeline — vision observation feeds into retrieval and generation</p>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>System Components</h2>
+      <div class="stats-table-wrap">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Qwen2.5-VL 7B</td>
+              <td>Structured photo observations and final answers (vision + chat) via LM Studio</td>
+            </tr>
+            <tr>
+              <td>ChromaDB</td>
+              <td>Vector store of chunked dermatology papers</td>
+            </tr>
+            <tr>
+              <td>BGE embeddings</td>
+              <td>Local embeddings for question and paper chunk retrieval</td>
+            </tr>
+            <tr>
+              <td>Flask web UI</td>
+              <td>Browser interface for text Q&amp;A and photo upload (JPG, PNG, WebP)</td>
+            </tr>
+            <tr>
+              <td>CLI (<code>ask_acne.py</code>)</td>
+              <td>Command-line assistant with optional RAG toggle</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>Research Corpus</h2>
+      <p>
+        Dermatology papers are converted to markdown (via Marker PDF pipeline), chunked, and ingested
+        into ChromaDB. The corpus covers five topic areas:
+      </p>
+      <ul class="contribution-list" style="margin-top: 1rem;">
+        <li>
+          <strong>Hormones &amp; genetics</strong>
+          <p>Puberty, genetics, and internal body changes that cause acne.</p>
+        </li>
+        <li>
+          <strong>Bacteria &amp; inflammation</strong>
+          <p>Skin bacteria (e.g. <em>C. acnes</em>) and inflammatory responses.</p>
+        </li>
+        <li>
+          <strong>Environment &amp; stress</strong>
+          <p>Sweat, products, towels, and mental stress effects on skin.</p>
+        </li>
+        <li>
+          <strong>Medicine &amp; skincare</strong>
+          <p>Retinoids, benzoyl peroxide, azelaic acid, and proven ingredients.</p>
+        </li>
+        <li>
+          <strong>Diet &amp; habits</strong>
+          <p>Food, sleep, and washing habits in relation to skin health.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="case-section">
+      <h2>Human Evaluation</h2>
+      <p>
+        A blinded human evaluation compared base Qwen2.5-VL responses against RAG-augmented responses
+        across 6 paired prompts (5 text + 1 photo query), scored by 5 independent reviewers on
+        groundedness, completeness, and safety (1–5 scale).
+      </p>
+      <div class="stats-table-wrap" style="margin-top: 1.25rem;">
+        <table class="stats-table">
+          <thead>
+            <tr>
+              <th>Condition</th>
+              <th>Groundedness</th>
+              <th>Completeness</th>
+              <th>Safety</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Base (no RAG)</td>
+              <td>2.5</td>
+              <td>4.2</td>
+              <td>4.0</td>
+            </tr>
+            <tr>
+              <td>RAG</td>
+              <td>4.6</td>
+              <td>3.8</td>
+              <td>4.7</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top: 1rem;">
+        RAG was preferred by reviewer majority on <strong>5 of 6</strong> prompts. All 28 inline
+        citation claims in RAG responses were manually verified as fully supported by retrieved
+        excerpts (100% citation accuracy).
+      </p>
+    </section>
+
+    <section class="case-section">
+      <h2>My Contributions</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong>End-to-end RAG pipeline</strong>
+          <p>Built the ingestion, chunking, retrieval, and generation pipeline in <code>rag/</code> with LM Studio clients for local embeddings and chat.</p>
+        </li>
+        <li>
+          <strong>Multimodal vision integration</strong>
+          <p>Integrated Qwen2.5-VL for structured face-photo observations that feed into retrieval and answer generation.</p>
+        </li>
+        <li>
+          <strong>Web &amp; CLI interfaces</strong>
+          <p>Developed the Flask web app and <code>ask_acne.py</code> CLI with RAG toggle, photo upload, and citation display.</p>
+        </li>
+        <li>
+          <strong>Evaluation design</strong>
+          <p>Co-designed and participated in blinded human evaluation comparing base vs. RAG responses across 6 prompts with 5 reviewers.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="case-section">
+      <h2>Technologies</h2>
+      <div class="tech-grid">
+        <span class="tech-pill">Python</span>
+        <span class="tech-pill">Qwen2.5-VL</span>
+        <span class="tech-pill">RAG</span>
+        <span class="tech-pill">ChromaDB</span>
+        <span class="tech-pill">BGE Embeddings</span>
+        <span class="tech-pill">LM Studio</span>
+        <span class="tech-pill">Flask</span>
+        <span class="tech-pill">Marker PDF</span>
+      </div>
+    </section>
+
+    <section class="case-section">
+      <h2>Resources</h2>
+      <ul class="contribution-list">
+        <li>
+          <strong><a href="https://github.com/VincentXayasak/Facial-Acne-AI" target="_blank" rel="noopener">GitHub Repository</a></strong>
+          <p>Full source — RAG pipeline, web UI, CLI, ingested paper markdown, and evaluation data.</p>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Vincent Xayasak</p>
+  </footer>
+  <script src="../js/nav.js"></script>
+</body>
+</html>
