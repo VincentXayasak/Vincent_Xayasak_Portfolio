@@ -8,28 +8,16 @@
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
-  <header class="site-header">
-    <nav class="nav">
-      <a href="../index.html" class="nav-logo">VX</a>
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
-        </svg>
-      </button>
-      <ul class="nav-links">
-        <li><a href="../index.html#home">Home</a></li>
-        <li><a href="../index.html#about">About</a></li>
-        <li><a href="../index.html#projects">Projects</a></li>
-        <li><a href="../index.html#contact">Contact</a></li>
-      </ul>
-    </nav>
+<body class="case-page">
+  <header class="hud hud--case">
+    <a href="../index.html" class="hud-back">← Room</a>
+    <span class="hud-title">Vincent Xayasak</span>
+    <span id="time-display">00:00</span>
   </header>
 
-  <main class="case-study-main">
-    <a href="../index.html" class="back-link">← Back to portfolio</a>
+  <main class="case-study-main case-paper">
 
     <header class="case-study-header">
       <div class="project-card-meta">
@@ -213,9 +201,9 @@
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="hud-bottom">
     <p>&copy; 2026 Vincent Xayasak</p>
   </footer>
-  <script src="../js/nav.js"></script>
+  <script src="../js/hud.js"></script>
 </body>
 </html>

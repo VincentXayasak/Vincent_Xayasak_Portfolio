@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Vincent Xayasak — ML and software engineering portfolio">
   <title>Vincent Xayasak — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="scene" id="scene">
@@ -37,11 +36,11 @@
           <div class="corkboard">
             <div class="cork-wood-frame"></div>
             <div class="cork-surface">
-              <div class="note n-y"></div>
-              <div class="note n-b"></div>
-              <div class="note n-p"></div>
-              <div class="note n-v"></div>
-              <div class="note n-o"></div>
+              <div class="note n-y"><span>ideas!!</span></div>
+              <div class="note n-b"><span>todo</span></div>
+              <div class="note n-p"><span>call mom</span></div>
+              <div class="note n-v"><span>sketch</span></div>
+              <div class="note n-o"><span>wip</span></div>
               <div class="polaroid p1"><div class="polaroid-art"></div></div>
               <div class="polaroid p2"><div class="polaroid-art"></div></div>
               <div class="pin" style="--x:16%;--y:12%;--c:#e55"></div>
@@ -85,8 +84,27 @@
             <div class="monitor">
               <div class="crt-frame">
                 <div class="crt-screen" id="crt-screen">
-                  <p class="screen-title">Vincent Xayasak</p>
-                  <p class="screen-cta">Click to get started</p>
+                  <p class="screen-title" id="screen-title">Vincent Xayasak Portfolio</p>
+                  <p class="screen-loading" id="screen-loading-label">LOADING</p>
+                  <div class="screen-bar" id="screen-bar">
+                    <div class="screen-bar-fill" id="screen-bar-fill"></div>
+                  </div>
+                  <div class="screen-body" id="screen-body" hidden></div>
+                  <nav class="screen-dock" id="screen-dock" aria-label="Portfolio navigation">
+                    <button type="button" class="dock-btn" data-section="projects" aria-label="Projects">
+                      <span class="si-folder"></span>
+                    </button>
+                    <button type="button" class="dock-btn" data-section="art" aria-label="Art">
+                      <span class="si-brush"></span>
+                    </button>
+                    <button type="button" class="dock-btn active" data-section="code" aria-label="Code">
+                      <span class="si-code"></span>
+                    </button>
+                    <button type="button" class="dock-btn" data-section="settings" aria-label="Settings">
+                      <span class="si-gear"></span>
+                    </button>
+                  </nav>
+                  <div class="screen-cursor" id="screen-cursor"></div>
                 </div>
               </div>
               <div class="crt-chin"></div>
@@ -161,6 +179,10 @@
     <span id="time-display">00:00</span>
   </header>
 
-  <script src="js/room.js"></script>
+  <footer class="hud-bottom">
+    <p id="hint-text">Click the dock icons on the monitor to explore</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
